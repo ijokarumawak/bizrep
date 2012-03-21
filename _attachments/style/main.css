@@ -1,0 +1,44 @@
+  body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+  .sidebar-nav {
+    padding: 9px 0;
+  }
+  .loginInfo {
+  	display: inline-block;
+  	margin-top: 8px;
+  	color: white;
+  }
+  .loginForm {
+  	display: inline-block;
+  	margin-top: 5px;
+  	margin-bottom: 0px;
+  	color: white;
+  }
+  .loginForm label {
+  	margin: 0px;
+  	display: inline-block;
+  	color: white;
+  }
+  .loginForm input {
+  	margin: 0px;
+  }
+
+
+.entityForm label {
+  display: inline-block;
+  width: 140px;
+  padding-top: 5px;
+  text-align: right;
+}
+
+.entityForm label.value {
+  display: inline-block;
+  text-align: left;
+}
+
+.entityForm input {
+  display: inline-block;
+  text-align: left;
+}

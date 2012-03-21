@@ -1,0 +1,97 @@
+<form class="entityForm" id="customerForm">
+<label>rev:</label>
+<label class="value">{{_rev}}</label><br/>
+<label>顧客名:</label>
+<input type="text" name="name" required="required" value="{{name}}"><br/>
+<label for="lastName">住所：</label>
+<input type="text" name="address" value="{{address}}"><br/>
+<label for="firstName">Webサイト：</label>
+<input type="text" name="url" value="{{url}}"><br/>
+
+<p>
+	<a class="btn btn-primary" onclick="$(this).popover('hide'); addPerson()" id="addPersonBtn">お客様追加 &raquo;</a>
+</p>
+<div id="people">
+	{{#people}}
+	<div class="person">
+		<hr/>
+		<p>
+			<a class="btn deleteElementBtn" onclick="$(this).popover('hide'); $(this).parent().parent().remove()">削除 &raquo;</a>
+		</p>
+		<label>姓：</label>
+		<input type="text" name="lastName" value="{{lastName}}">
+		<label>名：</label>
+		<input type="text" name="firstName" value="{{firstName}}"><br/>
+		<label>メールアドレス：</label>
+		<input type="text" name="mail" value="{{mail}}">
+		<label>部課：</label>
+		<input type="text" name="department" value="{{department}}"><br/>
+		<label>役職：</label>
+		<input type="text" name="title" value="{{title}}">
+	</div>
+	{{/people}}
+	
+</div>
+
+<p>
+	<a class="btn btn-primary" id="addAssigneeBtn" onclick="$(this).popover('hide'); addAssignee()">担当者追加 &raquo;</a>
+</p>
+<div>
+	<hr/>
+	<ul id="assignees">
+{{#assignees}}
+		<li class="assignee">
+			<a class="btn deleteElementBtn" onclick="$(this).popover('hide'); $(this).parent().remove()">削除 &raquo;</a>
+			<select name="name"><option selected="true">{{name}}</option></select>
+			<label>説明：</label>
+			<input type="text" name="description" value="{{description}}">
+		</li>
+{{/assignees}}
+	</ul>
+</div>
+
+<!-- 追加用のテンプレート -->
+<div style="display: none;">
+
+	<div class="person" id="person-template">
+		<hr/>
+		<p>
+			<a class="btn deleteElementBtn" onclick="$(this).popover('hide'); $(this).parent().parent().remove()">削除 &raquo;</a>
+		</p>
+		<!-- 同一フォーム内に同名のinputが複数存在する場合、ブラウザのバリデーションでエラーになってしまう。Chrome。 -->
+		<label>姓：</label>
+		<input type="text" name="lastName">
+		<label>名：</label>
+		<input type="text" name="firstName"><br/>
+		<label>メールアドレス：</label>
+		<input type="text" name="mail">
+		<label>部課：</label>
+		<input type="text" name="department"><br/>
+		<label>役職：</label>
+		<input type="text" name="title">
+	</div>
+	
+	<ul>
+		<li class="assignee" id="assignee-template">
+			<a class="btn deleteElementBtn" onclick="$(this).popover('hide'); $(this).parent().remove()">削除 &raquo;</a>
+			<select id="assignees-template" name="name"></select>
+			<label>説明：</label>
+			<input type="text" name="description">
+		</li>
+	</ul>
+</div>
+
+<p>
+	<input class="btn btn-primary" type="submit" value="保存 &raquo;" id="saveBtn">
+	<a class="btn" onclick="$(this).popover('hide'); showCustomer('{{_id}}')" id="cancelBtn">キャンセル &raquo;</a>
+</p>
+</form>
+<script type="text/javascript">
+$('form').submit(function(event){
+    // フォーム送信をキャンセル。
+    event.preventDefault();
+    // 独自スクリプトで更新。
+    updateCustomer('{{_id}}', '{{_rev}}');
+});   
+setPopovers();
+</script>

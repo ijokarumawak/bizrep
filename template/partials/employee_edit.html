@@ -1,0 +1,38 @@
+<form class="entityForm" id="employeeForm">
+<div id="response"></div>
+<label>rev:</label>
+<label class="value">{{_rev}}</label><br/>
+<label>ユーザ名:</label>
+<label class="value">{{name}}</label><br/>
+<label for="lastName">姓：</label>
+<input type="text" name="lastName" required="required" value="{{lastName}}"><br/>
+<label for="firstName">名：</label>
+<input type="text" name="firstName" required="required" value="{{firstName}}"><br/>
+<label for="department">部課：</label>
+<input type="text" name="department" value="{{department}}"><br/>
+<label for="title">役職：</label>
+<input type="text" name="title" value="{{title}}"><br/>
+<p>
+	<input class="btn btn-primary" type="submit" value="保存 &raquo;" id="saveBtn">
+	<a class="btn" onclick="$(this).popover('hide'); showEmployee('{{name}}');" id="cancelBtn">キャンセル &raquo;</a>
+</p>
+</form>
+<script>
+$('form').submit(function(event){
+    // フォーム送信をキャンセル。
+    event.preventDefault();
+    // 独自スクリプトで更新。
+    updateEmployee('{{name}}');
+});   
+
+    $('#saveBtn').popover({
+    	title: "編集した内容を保存します",
+    	content: "クリックすると、ブラウザ上でフォームバリデーションを実行します。正常の場合、入力内容をCouchDBに保存します。管理者権限のあるユーザか、自分自身しか保存できません。その後、社員情報表示画面に戻ります。",
+    	placement: "right"
+    });
+    $('#cancelBtn').popover({
+    	title: "編集をキャンセルします",
+    	content: "クリックすると、入力内容を破棄し、社員情報表示画面に戻ります。",
+    	placement: "right"
+    });
+</script>

@@ -1,0 +1,48 @@
+<form class="entityForm">
+<label>rev:</label>
+<label class="value">{{_rev}}</label><br/>
+<label>ユーザ名:</label>
+<label class="value">{{name}}</label><br/>
+<label>姓：</label>
+<label class="value">{{lastName}}</label><br/>
+<label>名：</label>
+<label class="value">{{firstName}}</label><br/>
+<label>部課：</label>
+<label class="value">{{department}}</label><br/>
+<label>役職：</label>
+<label class="value">{{title}}</label><br/>
+</form>
+<p>
+	<a class="btn btn-primary" id="addTaskBtn">タスク追加 &raquo;</a>
+	<a class="btn btn-primary" id="editBtn" onclick="$(this).popover('hide'); editEmployee('{{name}}');">編集 &raquo;</a>
+	<a class="btn btn-primary" id="deleteBtn" data-toggle="modal" href="#deleteConfirm">削除 &raquo;</a>
+</p>
+
+<div class="modal hide fade" id="deleteConfirm">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>{{name}} を削除します、よろしいですか？</h3>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-dismiss="modal" onclick="deleteEmployee('{{name}}')">削除</a>
+    <a href="#" class="btn" data-dismiss="modal">キャンセル</a>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $('#addTaskBtn').popover({
+    	title: "営業マンのタスクを作成します",
+    	content: "未実装です。",
+    	placement: "right"
+    });
+    $('#editBtn').popover({
+    	title: "社員情報を編集します",
+    	content: "編集画面への遷移は別の<code>show</code>を利用しています。<code>shows/employee-edit.js</code>を参照してください。",
+    	placement: "right"
+    });
+    $('#deleteBtn').popover({
+    	title: "社員情報を削除します",
+    	content: "CouchDBの<code>update handler</code>を利用して社員情報を削除します。<code>updates/employee.js</code>を参照してください。管理者権限を持っているユーザか、自分自身しか削除できません。",
+    	placement: "right"
+    });
+</script>
